@@ -1,6 +1,9 @@
 package com.jpa.livraria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Livro {
@@ -9,9 +12,13 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Título é obrigatório")
     private String titulo;
+    @NotBlank(message = "Autor é obrigatório")
     private String autor;
+    @NotNull(message = "Preço é obrigatório")
     private Double preco;
+
     private String isbn;
 
     // Getters e Setters
