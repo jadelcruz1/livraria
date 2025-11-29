@@ -34,10 +34,13 @@ public class LivroController {
         return service.buscarPorId(id);
     }
 
-    /*@PostMapping
-    public Livro criar(@RequestBody Livro livro) {
-        return service.salvar(livro);
-    }*/
+   // buscar por autor
+   @GetMapping("/autor/{autor}")
+   public ResponseEntity<List<Livro>> listarPorAutor(@PathVariable String autor) {
+       List<Livro> livros = service.buscarPorAutor(autor);
+       return ResponseEntity.ok(livros);
+   }
+
 
     @PostMapping
     public ResponseEntity<List<Livro>> adicionarLivros(@RequestBody List<Livro> livros) {
@@ -65,13 +68,11 @@ public class LivroController {
         return ResponseEntity.noContent().build();
     }
 
-
-
-
     @PutMapping("/{id}")
     public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livroAtualizado) {
         Livro atualizado = service.atualizarLivroService(id, livroAtualizado);
         return ResponseEntity.ok(atualizado);
     }
+
 
 }

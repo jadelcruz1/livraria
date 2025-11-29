@@ -53,5 +53,9 @@ public class LivroService {
         repository.deleteAll();
     }
 
+    public List<Livro> buscarPorAutor(String autor) {
+        return repository.findByAutor(autor);
+    }
+
 
 }
