@@ -31,4 +31,27 @@ public class LivroService {
     public Livro buscarPorId(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    // Novo método de atualização
+    public Livro atualizarLivroService(Long id, Livro livroAtualizado) {
+        Livro livroExistente = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        livroExistente.setTitulo(livroAtualizado.getTitulo());
+        livroExistente.setAutor(livroAtualizado.getAutor());
+        livroExistente.setPreco(livroAtualizado.getPreco());
+        livroExistente.setIsbn(livroAtualizado.getIsbn());
+
+        return repository.save(livroExistente);
+    }
+
+    public void deletarEmLote(List<Long> ids) {
+        repository.deleteAllById(ids);
+    }
+
+    public void deletarTodos() {
+        repository.deleteAll();
+    }
+
+
 }
